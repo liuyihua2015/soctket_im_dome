@@ -47,19 +47,28 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void goToChatPage(BuildContext contentcontext) {
-    @override
-    void dispose() {
-      super.dispose();
-      _socketCS.dispose();
-    }
+  void goToChatPage(BuildContext content) {
+    // @override
+    // void dispose() {
+    //   super.dispose();
+    //   _socketCS.dispose();
+    // }
+
+
+
+  }
+
+  void _handleTapboxChanged(bool newValue) {
+    setState(() {
+
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: "Socket IM",
-      home:  SettingHomePage(),
+      home:  SettingHomePage(createServer,createClient,goToChatPage),
     );
   }
 }

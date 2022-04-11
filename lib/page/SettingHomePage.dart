@@ -3,17 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class SettingHomePage extends StatefulWidget {
-  // final void Function(int port) createServiceCallBack;
-  // final void Function(String address, String port) createClientCallBack;
-  // final void Function(BuildContext childContext) gotoChatPage;
+  final Function(int port) _createServerCallback;
+  final Function(String address, int port) _createClientCallback;
+  final Function(BuildContext childContext) _goToChatPage;
 
-  const SettingHomePage({Key? key}) : super(key: key);
-
-  // SettingHomePage(
-  // {Key? key
-  //     this._createServiceCallBack,
-  //     this._createClientCallBack,
-  //     this._gotoChatPage} ) : super(key: key);
+  const SettingHomePage(this._createServerCallback, this._createClientCallback,
+      this._goToChatPage,
+      {Key? key})
+      : super(key: key);
 
   @override
   _SettingHomePageState createState() => _SettingHomePageState();
