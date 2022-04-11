@@ -10,11 +10,11 @@ class Message {
   static const String TYPE_SYSTEM = "system";
   static const String TYPE_ME = "me";
 
-  Message({
+  Message(
     this.from,
     this.msg,
     this.meme,
-  });
+  );
 
   Message.fromJson(dynamic json) {
     from = json['type'];

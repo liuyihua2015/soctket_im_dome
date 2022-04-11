@@ -3,7 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class SettingHomePage extends StatefulWidget {
+  // final void Function(int port) createServiceCallBack;
+  // final void Function(String address, String port) createClientCallBack;
+  // final void Function(BuildContext childContext) gotoChatPage;
+
   const SettingHomePage({Key? key}) : super(key: key);
+
+  // SettingHomePage(
+  // {Key? key
+  //     this._createServiceCallBack,
+  //     this._createClientCallBack,
+  //     this._gotoChatPage} ) : super(key: key);
 
   @override
   _SettingHomePageState createState() => _SettingHomePageState();
@@ -69,9 +79,9 @@ class _SettingHomePageState extends State<SettingHomePage> {
             const Text("Server IP："),
             Expanded(
                 child: TextField(
-                  controller: _clientAddressPortController,
-                  keyboardType: TextInputType.number,
-                ))
+              controller: _clientAddressPortController,
+              keyboardType: TextInputType.number,
+            ))
           ],
         ),
         Row(
@@ -79,9 +89,9 @@ class _SettingHomePageState extends State<SettingHomePage> {
             const Text("Server 端口号："),
             Expanded(
                 child: TextField(
-                  controller: _clientPortController,
-                  keyboardType: TextInputType.number,
-                ))
+              controller: _clientPortController,
+              keyboardType: TextInputType.number,
+            ))
           ],
         ),
         const SizedBox(height: 5),
