@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.soctket_im_dome">
    <application
-        android:label="soctket_im_dome"
+        android:label="socket_im_dome"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
