@@ -19,7 +19,7 @@ class SettingHomePage extends StatefulWidget {
 class _SettingHomePageState extends State<SettingHomePage> {
   String ipAddress = "";
   final _serverPortController = TextEditingController();
-  final _clientAddressPortController = TextEditingController();
+  final _clientAddressController = TextEditingController();
   final _clientPortController = TextEditingController();
 
   @override
@@ -30,10 +30,9 @@ class _SettingHomePageState extends State<SettingHomePage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _serverPortController.dispose();
-    _clientAddressPortController.dispose();
+    _clientAddressController.dispose();
     _clientPortController.dispose();
   }
 
@@ -65,38 +64,6 @@ class _SettingHomePageState extends State<SettingHomePage> {
     );
   }
 
-  Widget getClientConfig() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Text("Socket client 模式运行", style: TextStyle(fontSize: 26)),
-        const SizedBox(height: 5),
-        Row(
-          children: [
-            const Text("Server IP："),
-            Expanded(
-                child: TextField(
-              controller: _clientAddressPortController,
-              keyboardType: TextInputType.number,
-            ))
-          ],
-        ),
-        Row(
-          children: [
-            const Text("Server 端口号："),
-            Expanded(
-                child: TextField(
-              controller: _clientPortController,
-              keyboardType: TextInputType.number,
-            ))
-          ],
-        ),
-        const SizedBox(height: 5),
-        OutlinedButton(onPressed: () {}, child: const Text("启动"))
-      ],
-    );
-  }
-
   Widget getServerConfig() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,12 +76,68 @@ class _SettingHomePageState extends State<SettingHomePage> {
             Expanded(
                 child: TextField(
               controller: _serverPortController,
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.emailAddress,
             ))
           ],
         ),
         const SizedBox(height: 5),
-        OutlinedButton(onPressed: () {}, child: const Text("启动"))
+        OutlinedButton(
+            onPressed: () {
+              if (_serverPortController.text.isEmpty) {
+                debugPrint("Server IP is empty");
+                return;
+              }
+              widget._createServerCallback
+                  .call(int.parse(_serverPortController.text));
+              widget._goToChatPage(context);
+            },
+            child: const Text("启动"))
+      ],
+    );
+  }
+
+  Widget getClientConfig() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text("Socket client 模式运行", style: TextStyle(fontSize: 26)),
+        const SizedBox(height: 5),
+        Row(
+          children: [
+            const Text("Server IP："),
+            Expanded(
+                child: TextField(
+              controller: _clientAddressController,
+              keyboardType: TextInputType.emailAddress,
+            ))
+          ],
+        ),
+        Row(
+          children: [
+            const Text("Server 端口号："),
+            Expanded(
+                child: TextField(
+              controller: _clientPortController,
+              keyboardType: TextInputType.emailAddress,
+            ))
+          ],
+        ),
+        const SizedBox(height: 5),
+        OutlinedButton(
+            onPressed: () {
+              if (_clientAddressController.text.isEmpty) {
+                debugPrint("Server IP is empty");
+                return;
+              }
+              if (_clientPortController.text.isEmpty) {
+                debugPrint("Port is empty");
+                return;
+              }
+              widget._createClientCallback.call(_clientAddressController.text,
+                  int.parse(_clientPortController.text));
+              widget._goToChatPage(context);
+            },
+            child: const Text("启动"))
       ],
     );
   }

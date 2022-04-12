@@ -33,6 +33,10 @@ class SocketServer extends BaseSocketCS {
       serverSocket.listen((clientSocket) {
         utf8.decoder.bind(clientSocket).listen((data) {
           msgStream.add(Message.fromJson(json.decode(data)));
+
+          debugPrint(data);
+
+          send(Message(Message.TYPE_USER,"hello world, too",""));
         });
         clients.add(clientSocket);
       });
@@ -66,10 +70,13 @@ class SocketClient extends BaseSocketCS {
 
   @override
   void init() async {
-    clientSocket = await Socket.connect(address, port) as Socket;
+    clientSocket = await Socket.connect(address, port);
     utf8.decoder.bind(clientSocket).listen((data) {
       msgStream.add(Message.fromJson(json.encode(data)));
+      //test code need delete
+      debugPrint(data);
     });
+    send(Message(Message.TYPE_USER,"hello world",""));
   }
 
   @override
