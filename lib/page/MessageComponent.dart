@@ -10,7 +10,12 @@ class MessageComponent extends StatelessWidget {
   }) : super(key: key);
 
   Widget showMessage() {
-    return Text(_msg.msg!);
+    if (_msg.from == Message.TYPE_ME) {
+      return Text(_msg.msg!,style: const TextStyle(color: Colors.white),);
+    } else {
+      return Text(_msg.msg!,style: const TextStyle(color: Colors.black),);
+    }
+
   }
 
  Widget containerOpposite(BuildContext context) {
@@ -44,9 +49,9 @@ class MessageComponent extends StatelessWidget {
           margin: const EdgeInsets.fromLTRB(0, 6, 0, 6),
           constraints:
           BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.6),
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            color: Colors.green[400],
+            borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(25),
                 topLeft: Radius.circular(25),
                 bottomLeft: Radius.circular(25)),

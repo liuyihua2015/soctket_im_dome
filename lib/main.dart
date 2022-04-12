@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soctket_im_dome/model/Message.dart';
+import 'package:soctket_im_dome/page/ChatPage.dart';
 import '/page/SettingHomePage.dart';
 import 'net/Socket.dart';
 
@@ -17,6 +18,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late BaseSocketCS _socketCS;
   final List<Message> _messages = [];
+
+
+  @override
+  void initState() {
+    super.initState();
+    _messages.insert(0, Message(Message.TYPE_USER,"你好！",""));
+    _messages.insert(1, Message(Message.TYPE_ME,"你好！很高兴认识你！",""));
+    _messages.insert(2, Message(Message.TYPE_USER,"你也是！",""));
+
+
+  }
 
   void createServer(int port) {
     _socketCS = SocketServer(port);
@@ -47,7 +59,10 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void goToChatPage(BuildContext content) {}
+  void goToChatPage(BuildContext childContent) {
+    Navigator.of(childContent).pushReplacement(MaterialPageRoute(
+        builder: (content) => ChatPage(_messages, onSendMessage)));
+  }
 
   @override
   void dispose() {
