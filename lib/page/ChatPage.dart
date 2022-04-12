@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../model/Message.dart';
 import 'MessageComponent.dart';
+import 'MessageInputComponent.dart';
 
 class ChatPage extends StatefulWidget {
   final List<Message> _messages;
@@ -13,8 +14,10 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  late TextEditingController _msgController;
+
   Widget getInputPanel() {
-    return const Text("123");
+    return MessageInputComponent(msgController: _msgController, chatPage: widget);
   }
 
   Widget getListView() {
@@ -44,5 +47,17 @@ class _ChatPageState extends State<ChatPage> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _msgController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _msgController.dispose();
   }
 }

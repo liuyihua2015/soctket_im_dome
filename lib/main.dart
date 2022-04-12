@@ -19,17 +19,6 @@ class _MyAppState extends State<MyApp> {
   late BaseSocketCS _socketCS;
   final List<Message> _messages = [];
 
-
-  @override
-  void initState() {
-    super.initState();
-    _messages.insert(0, Message(Message.TYPE_USER,"你好！",""));
-    _messages.insert(1, Message(Message.TYPE_ME,"你好！很高兴认识你！",""));
-    _messages.insert(2, Message(Message.TYPE_USER,"你也是！",""));
-
-
-  }
-
   void createServer(int port) {
     _socketCS = SocketServer(port);
     initSocketCS();
