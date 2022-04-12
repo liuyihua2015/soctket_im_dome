@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../model/Message.dart';
+import 'MessageComponent.dart';
 
 class ChatPage extends StatefulWidget {
   final List<Message> _messages;
@@ -18,7 +18,14 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget getListView() {
-    return const Text("123");
+    return ListView.builder(
+      reverse: true,
+      itemBuilder: (_, int index) {
+        Message msg = widget._messages[index];
+        return MessageComponent(msg);
+      },
+      itemCount: widget._messages.length,
+    );
   }
 
   @override
