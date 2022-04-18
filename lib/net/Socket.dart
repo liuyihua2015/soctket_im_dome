@@ -36,7 +36,7 @@ class SocketServer extends BaseSocketCS {
 
           debugPrint(data);
 
-          send(Message(Message.TYPE_USER,"hello world, too",""));
+          send(Message(Message.TYPE_USER, "hello world, too", ""));
         });
         clients.add(clientSocket);
       });
@@ -76,7 +76,7 @@ class SocketClient extends BaseSocketCS {
       //test code need delete
       debugPrint(data);
     });
-    send(Message(Message.TYPE_USER,"hello world",""));
+    send(Message(Message.TYPE_USER, "hello world", ""));
   }
 
   @override
@@ -90,5 +90,4 @@ class SocketClient extends BaseSocketCS {
     super.dispose();
     clientSocket.close();
   }
-
 }
